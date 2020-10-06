@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "74902748782",
+    "firebase_url": "https://estacionclimaticaiot.firebaseio.com",
+    "project_id": "estacionclimaticaiot",
+    "storage_bucket": "estacionclimaticaiot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74902748782:android:21ac4274646637754ab07f",
+        "android_client_info": {
+          "package_name": "com.xamarin.EstacionIotApk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74902748782-luemre9hemiojb7ekejrspsptcrb8s4h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xamarin.EstacionIotApk",
+            "certificate_hash": "da17e103ec018f9deae8136e904a98f8a54575de"
+          }
+        },
+        {
+          "client_id": "74902748782-afs1o0mk2vfvu2j4l15qp47ivnqld8vl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1qT79suhJDieSQ_2xc7FjF2W6wJXh1Wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74902748782-afs1o0mk2vfvu2j4l15qp47ivnqld8vl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74902748782:android:60fa1b532a0f0eab4ab07f",
+        "android_client_info": {
+          "package_name": "com.xamarin.fcmIot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74902748782-afs1o0mk2vfvu2j4l15qp47ivnqld8vl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1qT79suhJDieSQ_2xc7FjF2W6wJXh1Wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74902748782-afs1o0mk2vfvu2j4l15qp47ivnqld8vl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

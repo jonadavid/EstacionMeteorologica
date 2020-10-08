@@ -20,6 +20,11 @@ namespace EstacionMeteorologica.Droid
 
             base.OnCreate(savedInstanceState);
 
+
+            //para el uso de radiobuttons experimental
+            global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             //firebase
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             bool flag = false;

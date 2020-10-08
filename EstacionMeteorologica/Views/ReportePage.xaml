@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EstacionMeteorologica.Views.ReportePage"
+             Title="{Binding Title}" >
+    
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Padding="10,10,10,10" VerticalOptions="FillAndExpand">
+                    <Image Source="ug.png" VerticalOptions="Center" HeightRequest="64" />
+                </ContentView>
+            </StackLayout>
+            
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout BackgroundColor="WhiteSmoke"  Orientation="Vertical" Padding="5" Spacing="10">
+
+                <Label Text="Fecha de Inicio: "/>
+                <DatePicker
+                    x:Name="FechaInicio"
+                      Format="dd/MM/yyyy"/>
+            </StackLayout>
+        </ScrollView>
+
+        <ScrollView Grid.Row="2">
+            <StackLayout BackgroundColor="WhiteSmoke"  Orientation="Vertical" Padding="5" Spacing="10">
+
+                <Label Text="Fecha Fin: "/>
+                <DatePicker
+                    x:Name="FechaFin"
+                    Format="dd/MM/yyyy"/>
+            </StackLayout>
+        </ScrollView>
+        <ScrollView Grid.Row="3">
+            <StackLayout Orientation="Horizontal" Background="WhiteSmoke" Padding="5" Spacing="10">
+                <Label Text="Hora Inicio: "/>
+                <Picker  x:Name="HoraInicio" TabIndex="0" Title="Horas">
+                    <Picker.Items>
+                        
+                    </Picker.Items>
+                </Picker>
+
+                <Picker  x:Name="MinutoInicio" TabIndex="0" Title="Minutos">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+
+                <Picker  x:Name="SegundoInicio" TabIndex="0" Title="Segundos">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+        </ScrollView>
+        <ScrollView Grid.Row="4" Background="WhiteSmoke">
+            <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
+                <Label Text="Hora Fin:     "/>
+                <Picker  x:Name="HoraFin" TabIndex="0" Title="Horas">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+
+                <Picker  x:Name="MinutoFin" TabIndex="0" Title="Minutos">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+
+                <Picker  x:Name="SegundoFin" TabIndex="0" Title="Segundos">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+        </ScrollView>
+
+        <ScrollView Grid.Row="5" Background="WhiteSmoke" >
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Exportar a: " HorizontalOptions="Center"/>
+                <Label Text="Excel: " HorizontalOptions="Center"/>
+                <Label Text="Exportar a: " HorizontalOptions="Center"/>
+                <Label Text="Exportar a: " HorizontalOptions="Center"/>
+
+                <RadioButton Text="Pdf"
+                             TextColor="Green"
+                             GroupName="exportar"
+                             Margin="{Binding MargenRadioButton}"
+                             IsChecked="True"
+                             />
+                
+                <RadioButton Text="Excel"
+                             TextColor="White"
+                             GroupName="exportar"
+                             Margin="{Binding MargenRadioButton}"/>
+                
+                <RadioButton Text="Word"
+                             TextColor="White"
+                             GroupName="exportar"
+                             Margin="{Binding MargenRadioButton}"/>
+
+
+            </StackLayout>
+
+        </ScrollView>
+
+        <ScrollView Grid.Row="6" Background="WhiteSmoke">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Seleccionar: " HorizontalOptions="Start"/>
+                <Picker  x:Name="Provincia" TabIndex="0" Title="Provincia">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+
+                <Picker  x:Name="Ciudad" TabIndex="0" Title="Ciudad">
+                    <Picker.Items>
+
+                    </Picker.Items>
+                </Picker>
+                
+            </StackLayout>
+
+        </ScrollView>
+
+
+        <ScrollView Grid.Row="7">
+            <StackLayout Orientation="Vertical" Padding="0" Spacing="0">
+                <Label Text="" FontSize="Title"/>
+               
+                <Button Margin="2" Text="Generar Reporte"
+                        Command="{Binding ActualizarCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            </StackLayout>
+        </ScrollView>
+
+    </Grid>
+    
+    
+
+</ContentPage>

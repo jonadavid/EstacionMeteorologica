@@ -87,11 +87,11 @@ namespace EstacionMeteorologica.ViewModels
            
             var EntriesTmp = new List<ChartEntry>
             {
-                 new ChartEntry(50)
+                 new ChartEntry(Datos.Temperatura)
                     {
-                    Color = SkiaSharp.SKColor.Parse("#FE9A2E"),
+                    Color = SkiaSharp.SKColor.Parse("#F13A04"),
                     
-                    TextColor = SkiaSharp.SKColor.Parse("#8181F7"),
+                    TextColor = SkiaSharp.SKColor.Parse("F13A04"),
                     Label ="Temperatura",
                     ValueLabel= Datos.Temperatura.ToString(),
                     
@@ -99,19 +99,40 @@ namespace EstacionMeteorologica.ViewModels
                     },
 
 
-                    new ChartEntry(50)
+                    new ChartEntry(Datos.Humedad)
                     {
-                    Color = SkiaSharp.SKColor.Parse("#FE9A2E"),
-                    TextColor = SkiaSharp.SKColor.Parse("#8181F7"),
+                    Color = SkiaSharp.SKColor.Parse("#A3BEE0"),
+                    TextColor = SkiaSharp.SKColor.Parse("#A3BEE0"),
                     Label ="Humedad",
                     ValueLabel= Datos.Humedad.ToString()
+                    }
+                    ,
+
+
+                    new ChartEntry(Datos.Radiacion)
+                    {
+                    Color = SkiaSharp.SKColor.Parse("#B923E9"),
+                    TextColor = SkiaSharp.SKColor.Parse("#B923E9"),
+                    Label ="Radiaciòn",
+                    ValueLabel= Datos.Radiacion.ToString()
+                    },
+
+
+                    new ChartEntry(Datos.Precipitacion_lluvia)
+                    {
+                    Color = SkiaSharp.SKColor.Parse("#6065DE"),
+                    TextColor = SkiaSharp.SKColor.Parse("#6065DE"),
+                    Label ="Precipitación de lluvia",
+                    ValueLabel= Datos.Precipitacion_lluvia.ToString()
                     }
 
             };
 
             Entries = EntriesTmp;
-            RadialGaugeChart chart = new RadialGaugeChart();
+            LineChart chart = new LineChart();
+            chart.BackgroundColor = SkiaSharp.SKColor.Parse("#FEFEFE");
             chart.Entries = Entries;
+            
             Sensor.Chart = chart;
         }
 

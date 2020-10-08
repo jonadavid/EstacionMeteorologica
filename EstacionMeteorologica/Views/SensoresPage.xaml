@@ -29,7 +29,7 @@
             
         </StackLayout>
         <ScrollView Grid.Row="1">
-            <StackLayout BackgroundColor="{StaticResource Accent}"  Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+            <StackLayout BackgroundColor="WhiteSmoke"  Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
                 <ContentView Padding="0,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  >
                     <Microcharts:ChartView x:Name="SensoresChart"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"   />
                 </ContentView>
@@ -39,13 +39,13 @@
         <ScrollView Grid.Row="2">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
                 <Label Text="" FontSize="Title"/>
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="" FontSize="16" Padding="0,0,0,0"/>
                 <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText xmlns:name="datos">
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Temperatura"/>
-                                <Span Text="{Binding Temperatura}" FontAttributes="Bold"/>
+                                <Span Text=""/>
+                                <Span Text="" FontAttributes="Bold"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>

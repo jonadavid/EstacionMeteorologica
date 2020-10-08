@@ -1,11 +1,17 @@
-﻿using EstacionMeteorologica.Models;
+﻿using DocumentFormat.OpenXml.Vml.Spreadsheet;
+using EstacionMeteorologica.Models;
 using EstacionMeteorologica.ViewModels;
 using Microcharts;
+using Newtonsoft.Json;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace EstacionMeteorologica.Views
@@ -14,15 +20,16 @@ namespace EstacionMeteorologica.Views
     {
 
         RequestReporteFechas request;
+        List<Ciudad> ciudad;
+      
         public ReportePage()
         {
             InitializeComponent();
-            BindingContext =  new ReporteViewModel(request);//para obtener la fuente de datos
+            BindingContext =  new ReporteViewModel(request, Provincia, Ciudad);//para obtener la fuente de datos
             FechaFin.Date =  DateTime.Now;
             SetearHoras();
             SetearMinutoSegundos();
-
-
+           
             //FechaFin.MinimumDate = ;
             //FechaFin.MaximumDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
@@ -36,6 +43,9 @@ namespace EstacionMeteorologica.Views
 
             SetearHoras();
             SetearMinutoSegundos();
+           
+
+          
         }
         private void SetearHoras() { 
 
@@ -83,8 +93,72 @@ namespace EstacionMeteorologica.Views
             SegundoFin.SelectedIndex = DateTime.Now.Second;
 
         }
-        
 
+
+       
+
+        private async void GetDataCiudadProvincia(string url)
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<Ciudad>>(jsonResult);
+           
+            ciudad = result;
+
+            Ciudad.Items.Clear();
+            if (ciudad.Count>0) {
+               
+            foreach (var item in ciudad)
+                Ciudad.Items.Add(item.Nombre_Ciudad);
+
+                Application.Current.Resources["SesionCiudad"] = result;
+
+                
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Alerta", response.Content.ToString(), "Aceptar");
+            }
+
+        }
+
+        private void Provincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+                           var picker = (Picker)sender;
+              int selectedIndex = picker.SelectedIndex;
+
+              if (selectedIndex != -1)
+              {
+                monkeyNameLabel.Text = (string)picker.ItemsSource[selectedIndex];
+              }
+             */
+
+            try
+            {
+
+               // var picker = (Picker)sender;
+                int selectedIndex = Provincia.SelectedIndex;
+
+                if (selectedIndex != -1)
+                {
+                    var pro = Provincia.SelectedItem;
+
+                    var sesionProvincia = (List<Provincia>)Application.Current.Resources["SesionProvincia"];
+
+                    var valorIndice = sesionProvincia.Where(x => x.Nombre_Provincia.Equals(pro)).FirstOrDefault().Id;
+
+                    var url = $"http://estacionclimaiot-001-site1.etempurl.com/api/GetCiudadProvincia?id_provincia={valorIndice}";
+                    GetDataCiudadProvincia(url);
+                }
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("Alerta", ex.Message, "Aceptar");
+            }
+        }
     }
 
 

@@ -19,7 +19,12 @@ namespace EstacionMeteorologica.ViewModels
 
 
 
-        List<ResponseReporteFecha> reportes;
+        private List<ResponseReporteFecha> reportes;
+        private List<Provincia> provincias;
+        private List<Ciudad> ciudades;
+
+        private Picker provincia;
+        private Picker ciudad;
 
         string margenRadioButton = string.Empty;
         public string MargenRadioButton
@@ -31,20 +36,48 @@ namespace EstacionMeteorologica.ViewModels
         #region[exportar a excel declaracion de variables]
         /*exportar a excel */
         public ICommand ExportToExcelCommand { private set; get; }
+
+        
+
+        public Picker Provincia
+        {
+            get => provincia; set
+            {
+                provincia = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Picker Ciudad
+        {
+            get => ciudad; set
+            {
+                ciudad = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ExcelService excelService;
         #endregion
-        public ReporteViewModel(RequestReporteFechas request)
+        public ReporteViewModel(RequestReporteFechas request, Picker provincia, Picker ciudad)
         {
+
+
+
             //string quryStrings =
             //$"provincia={request.Provincia}&ciudad={request.Ciudad}&fechaInicio={request.FechaInicio}&fechaFin={request.FechaFin}&horaInicio={request.HoraInicio}&horaFin={request.HoraFin}";
-
+            Provincia = provincia;
+            Ciudad = ciudad;
             Title = "Reporte";
             MargenRadioButton = "40";
+
+
+            GetDataProvincia("http://estacionclimaiot-001-site1.etempurl.com/api/Provincia");
 
             ExportToExcelCommand = new Command(async () =>
             {
 
-                await GetDataReporteFechas("http://estacionclimaiot-001-site1.etempurl.com/api/GetFiltraPorFechaHora?provincia=1&ciudad=1&fechaInicio=2020%2F05%2F01&horaInicio=00%3A00%3A00&horaFin=23%3A59%3A59");
+              await GetDataReporteFechas("http://estacionclimaiot-001-site1.etempurl.com/api/GetFiltraPorFechaHora?provincia=1&ciudad=1&fechaInicio=2020%2F05%2F01&horaInicio=00%3A00%3A00&horaFin=23%3A59%3A59");
               await ExportToExcel();
             });
             excelService = new ExcelService();
@@ -53,6 +86,7 @@ namespace EstacionMeteorologica.ViewModels
 
 
         }
+
 
         #region[Consumo de servico]
 
@@ -64,7 +98,38 @@ namespace EstacionMeteorologica.ViewModels
             var jsonResult = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<ResponseReporteFecha>>(jsonResult);
             reportes = result;
+           
         }
+
+        private async void GetDataProvincia(string url)
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<Provincia>>(jsonResult);
+
+            foreach (var item in result)
+                provincia.Items.Add(item.Nombre_Provincia);
+            //provincia.SelectedIndex = 0;
+
+            Application.Current.Resources["SesionProvincia"]= result;
+        }
+
+
+        private async void GetDataCuidad(string url)
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<Ciudad>>(jsonResult);
+           // ciudad = result;
+
+
+        }
+
+
         #endregion
 
         #region[usando reflexiones para obtner la cantidad de campos y sus nombres desde una clase T]
@@ -106,7 +171,15 @@ namespace EstacionMeteorologica.ViewModels
             {
                 var row = new List<string>()
                 {
-                    reporte.NombreProvincia
+                    reporte.NombreProvincia,
+                    reporte.Ciudad,
+                    reporte.Id.ToString(),
+                    reporte.Temperatura.ToString(),
+                    reporte.Humedad.ToString(),
+                    reporte.Precipitacion_lluvia.ToString(),
+                    reporte.Sensacion_termica.ToString(),
+                    String.Format("{0:u}",reporte.Fecha),
+                    reporte.Id_estacion.ToString(), 
 
                 };
 
@@ -122,6 +195,11 @@ namespace EstacionMeteorologica.ViewModels
         }
         #endregion
 
+
+        /*vistas */
+
+      
+       
 
     }
 }

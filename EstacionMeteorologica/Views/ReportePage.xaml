@@ -9,6 +9,30 @@
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
+        <Style TargetType="RadioButton">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="exportar">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="Red" />
+                                <Setter Property="Opacity"
+                                        Value="0.5" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="IsChecked">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="Green" />
+                                <Setter Property="Opacity"
+                                        Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
     </ContentPage.Resources>
 
     
@@ -48,20 +72,20 @@
         <ScrollView Grid.Row="3">
             <StackLayout Orientation="Horizontal" Background="WhiteSmoke" Padding="5" Spacing="10">
                 <Label Text="Hora Inicio: "/>
-                <Picker  x:Name="HoraInicio" TabIndex="0" Title="Horas">
+                <Picker  x:Name="HoraInicio" TabIndex="0" Title="Horas    ">
                     <Picker.Items>
                         
                     </Picker.Items>
                 </Picker>
 
-                <Picker  x:Name="MinutoInicio" TabIndex="0" Title="Minutos">
+                <Picker  x:Name="MinutoInicio" TabIndex="0" Title="Minutos ">
                     <Picker.Items>
 
                     </Picker.Items>
                 </Picker>
 
-                <Picker  x:Name="SegundoInicio" TabIndex="0" Title="Segundos">
-                    <Picker.Items>
+                <Picker  x:Name="SegundoInicio" TabIndex="0" Title="Segundos" >
+                    <Picker.Items >
 
                     </Picker.Items>
                 </Picker>
@@ -69,9 +93,10 @@
 
         </ScrollView>
         <ScrollView Grid.Row="4" Background="WhiteSmoke">
+            
             <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
                 <Label Text="Hora Fin:     "/>
-                <Picker  x:Name="HoraFin" TabIndex="0" Title="Horas">
+                <Picker  x:Name="HoraFin" TabIndex="0" Title="Horas" >
                     <Picker.Items>
 
                     </Picker.Items>
@@ -92,35 +117,9 @@
 
         </ScrollView>
 
-        <ScrollView Grid.Row="5" Background="WhiteSmoke" >
-            <StackLayout Orientation="Horizontal" >
-                <Label Text="Exportar a: " HorizontalOptions="Center"/>
-              
+        
 
-                <RadioButton Text="Pdf"
-                             TextColor="Green"
-                             GroupName="exportar"
-                             Margin="{Binding MargenRadioButton}"
-                             IsChecked="True"
-                             CheckedChanged="RadioButton_CheckedChanged"
-                             />
-                
-                <RadioButton Text="Excel"
-                             TextColor="White"
-                             GroupName="exportar"
-                             Margin="{Binding MargenRadioButton}"/>
-                
-                <RadioButton Text="Word"
-                             TextColor="White"
-                             GroupName="exportar"
-                             Margin="{Binding MargenRadioButton}"/>
-
-
-            </StackLayout>
-
-        </ScrollView>
-
-        <ScrollView Grid.Row="6" Background="WhiteSmoke">
+        <ScrollView Grid.Row="5" Background="WhiteSmoke">
             <StackLayout Orientation="Horizontal">
                 <Label Text="Seleccionar: " HorizontalOptions="Start"/>
                 <Picker  x:Name="Provincia" TabIndex="0" Title="Provincia">
@@ -140,12 +139,12 @@
         </ScrollView>
 
 
-        <ScrollView Grid.Row="7">
-            <StackLayout Orientation="Vertical" Padding="0" Spacing="0">
+        <ScrollView Grid.Row="6">
+            <StackLayout Orientation="Vertical" Padding="5" Spacing="5">
                 <Label Text="" FontSize="Title"/>
                
                 <Button Margin="2" Text="Generar Reporte"
-                        Command="{Binding ActualizarCommand}"
+                        Command="{Binding ExportToExcelCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
             </StackLayout>

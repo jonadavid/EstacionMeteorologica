@@ -19,12 +19,6 @@ namespace EstacionMeteorologica.ViewModels
         private DatosSensores datos;
         private List<ChartEntry> entradas;
 
-       
-
-        
-
-       
-
         public  List<ChartEntry> Entries 
         { get => entradas;
             set
@@ -89,13 +83,21 @@ namespace EstacionMeteorologica.ViewModels
             {
                  new ChartEntry(Datos.Temperatura)
                     {
-                    Color = SkiaSharp.SKColor.Parse("#F13A04"),
+                    Color = SkiaSharp.SKColor.Parse("#F70635"),
                     
-                    TextColor = SkiaSharp.SKColor.Parse("F13A04"),
+                    TextColor = SkiaSharp.SKColor.Parse("#F70635"),
                     Label ="Temperatura",
                     ValueLabel= Datos.Temperatura.ToString(),
                     
                     
+                    },
+
+                    new ChartEntry(Datos.Sensacion_termica)
+                    {
+                    Color = SkiaSharp.SKColor.Parse("#E96E19"),
+                    TextColor = SkiaSharp.SKColor.Parse("#E96E19"),
+                    Label ="Sensacion Térmica",
+                    ValueLabel= Datos.Sensacion_termica.ToString()
                     },
 
 

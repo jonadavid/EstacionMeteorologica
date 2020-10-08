@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EstacionMeteorologica.Models
 {
-    public class DatosSensores
+    public class DatosSensores: IReflection
     {
         public int Id { get; set; }
         public float Temperatura { get; set; }

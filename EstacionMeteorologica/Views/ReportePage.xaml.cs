@@ -28,9 +28,11 @@ namespace EstacionMeteorologica.Views
 
 
         }
-       
 
-       
+        private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+
+        }
     }
 
 

@@ -95,15 +95,14 @@
         <ScrollView Grid.Row="5" Background="WhiteSmoke" >
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Exportar a: " HorizontalOptions="Center"/>
-                <Label Text="Excel: " HorizontalOptions="Center"/>
-                <Label Text="Exportar a: " HorizontalOptions="Center"/>
-                <Label Text="Exportar a: " HorizontalOptions="Center"/>
+              
 
                 <RadioButton Text="Pdf"
                              TextColor="Green"
                              GroupName="exportar"
                              Margin="{Binding MargenRadioButton}"
                              IsChecked="True"
+                             CheckedChanged="RadioButton_CheckedChanged"
                              />
                 
                 <RadioButton Text="Excel"

@@ -59,7 +59,7 @@ namespace EstacionMeteorologica.ViewModels
 
         private ExcelService excelService;
         #endregion
-        public ReporteViewModel(RequestReporteFechas request, Picker provincia, Picker ciudad)
+        public ReporteViewModel()
         {
 
 
@@ -72,16 +72,36 @@ namespace EstacionMeteorologica.ViewModels
             MargenRadioButton = "40";
 
 
-            GetDataProvincia("http://estacionclimaiot-001-site1.etempurl.com/api/Provincia");
+           // GetDataProvincia("http://estacionclimaiot-001-site1.etempurl.com/api/Provincia");
 
-            ExportToExcelCommand = new Command(async () =>
+
+        }
+
+        public ReporteViewModel(List<ResponseReporteFecha> reporte)
+        {
+
+            reportes = reporte;
+
+            if (reporte != null)
             {
+                excelService = new ExcelService();
 
-              await GetDataReporteFechas("http://estacionclimaiot-001-site1.etempurl.com/api/GetFiltraPorFechaHora?provincia=1&ciudad=1&fechaInicio=2020%2F05%2F01&horaInicio=00%3A00%3A00&horaFin=23%3A59%3A59");
-              await ExportToExcel();
-            });
-            excelService = new ExcelService();
+                ExportToExcel().ConfigureAwait(true).GetAwaiter();
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("Alerta", "No existe datos!", "Aceptar");
+            }
 
+            //string quryStrings =
+            //$"provincia={request.Provincia}&ciudad={request.Ciudad}&fechaInicio={request.FechaInicio}&fechaFin={request.FechaFin}&horaInicio={request.HoraInicio}&horaFin={request.HoraFin}";
+
+
+
+
+
+            //  GetDataReporteFechas(url).ConfigureAwait(true).GetAwaiter();
+           
 
 
 
@@ -101,21 +121,7 @@ namespace EstacionMeteorologica.ViewModels
            
         }
 
-        private async void GetDataProvincia(string url)
-        {
-            var client = new HttpClient();
-            var response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            var jsonResult = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<Provincia>>(jsonResult);
-
-            foreach (var item in result)
-                provincia.Items.Add(item.Nombre_Provincia);
-            //provincia.SelectedIndex = 0;
-
-            Application.Current.Resources["SesionProvincia"]= result;
-        }
-
+       
 
         private async void GetDataCuidad(string url)
         {
@@ -177,6 +183,7 @@ namespace EstacionMeteorologica.ViewModels
                     reporte.Temperatura.ToString(),
                     reporte.Humedad.ToString(),
                     reporte.Precipitacion_lluvia.ToString(),
+                    reporte.Radiacion.ToString(),
                     reporte.Sensacion_termica.ToString(),
                     String.Format("{0:u}",reporte.Fecha),
                     reporte.Id_estacion.ToString(), 

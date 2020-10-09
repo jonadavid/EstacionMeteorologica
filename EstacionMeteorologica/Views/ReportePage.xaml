@@ -116,7 +116,7 @@
                 <Label Text="" FontSize="Title"/>
                
                 <Button Margin="2" Text="Generar Reporte"
-                        
+                        Clicked="Reporte_Clicked"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
             </StackLayout>
